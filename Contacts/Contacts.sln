@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31129.286
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contacts.WebApi", "Contacts.WebApi\Contacts.WebApi.csproj", "{D0494EDF-588A-4049-AC3C-9234457FDE5A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contacts.Common", "Contacts.Common\Contacts.Common.csproj", "{930ADE14-C9A2-4242-9A42-DADE0AC58FC4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D0494EDF-588A-4049-AC3C-9234457FDE5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0494EDF-588A-4049-AC3C-9234457FDE5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0494EDF-588A-4049-AC3C-9234457FDE5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0494EDF-588A-4049-AC3C-9234457FDE5A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{930ADE14-C9A2-4242-9A42-DADE0AC58FC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{930ADE14-C9A2-4242-9A42-DADE0AC58FC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{930ADE14-C9A2-4242-9A42-DADE0AC58FC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{930ADE14-C9A2-4242-9A42-DADE0AC58FC4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {773E0B23-5162-4864-BE81-20705B1C541B}
+	EndGlobalSection
+EndGlobal
