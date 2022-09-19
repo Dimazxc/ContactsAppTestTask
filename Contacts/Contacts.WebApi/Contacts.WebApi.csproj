@@ -6,7 +6,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
     <PackageReference Include="VueCliMiddleware" Version="3.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Contacts.Application\Contacts.Application.csproj" />
+    <ProjectReference Include="..\Contacts.Common\Contacts.Common.csproj" />
+    <ProjectReference Include="..\Contacts.Data.Contracts\Contacts.Data.Contracts.csproj" />
+    <ProjectReference Include="..\Contacts.WebApi.Core\Contacts.WebApi.Core.csproj" />
   </ItemGroup>
 
 

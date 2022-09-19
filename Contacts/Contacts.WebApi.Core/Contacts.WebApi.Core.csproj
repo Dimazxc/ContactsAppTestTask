@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Contacts.Application\Contacts.Application.csproj" />
+      <ProjectReference Include="..\Contacts.Common\Contacts.Common.csproj" />
+      <ProjectReference Include="..\Contacts.Data.Contracts\Contacts.Data.Contracts.csproj" />
+      <ProjectReference Include="..\Contacts.Data.Internal\Contacts.Data.Internal.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
+      <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="10.0.1" />
+    </ItemGroup>
+
+</Project>
