@@ -14,6 +14,8 @@ namespace Contacts.Application.AutoMapper
         private void ContactConfig()
         {
             CreateMap<Contact, ContactVM>()
+                .ForMember(dst => dst.Id,
+                    opt => opt.MapFrom(src => src.Id))
                 .ForMember(dst => dst.Name,
                     opt => opt.MapFrom(src => src.Name))
                 .ForMember(dst => dst.JobTitle, 

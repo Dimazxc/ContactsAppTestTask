@@ -19,29 +19,33 @@
       <template #cell(birthDate)="data">
         {{ data.item.birthDate | dateFormat }}
       </template>
-      <template #cell(actions)="data">
+      <template #cell(actions)="row">
         <b-button
           size="sm"
           squared variant="warning"
-          @click="updateContact(data.item.id)">
+          @click="updateContact(row.item.id)">
           Update <b-icon icon="person-check-fill" aria-hidden="true"></b-icon>
         </b-button>
         <b-button
             size="sm"
             class="mr-1"
             squared variant="danger"
-            @click="deleteContact(data.item.id)">
+            @click="deleteContact(row.item.id)">
           Delete <b-icon icon="person-dash-fill" aria-hidden="true"></b-icon>
         </b-button>
       </template>
     </b-table>
-    <ContactAddEditModal :contact-id=selectedContactId ref="contactAddEditModal"/>
+    <ContactAddEditModal
+      v-on:on-contact-added="onContactAdded"
+      v-on:on-contact-updated="onContactUpdated"
+      :contact-id=selectedContactId
+      ref="contactAddEditModal"/>
   </div>
 </template>
 
 <script>
 import ContactAddEditModal from "../contact-add-edit/ContactAddEditModal";
-import {nextTick} from "vue";
+import { nextTick } from "vue";
 
 export default {
   components: {
@@ -54,11 +58,7 @@ export default {
   },
   data() {
     return {
-      contacts: [
-          {id : 1, name: "Dima", mobilePhone: "+375291990245", jobTitle: "Addidas", birthDate: new Date() },
-          {id : 2, name: "Roma", mobilePhone: "+375291990245", jobTitle: "Itransition", birthDate: new Date()},
-          {id : 3, name: "Random", mobilePhone: "+375291990245", jobTitle: "Nike", birthDate: new Date()},
-      ],
+      contacts: [],
       fields: [
         { key: 'name', label: 'Contact Name', },
         { key: 'mobilePhone', label: 'Mobile Phone' },
@@ -73,23 +73,37 @@ export default {
     updateContact(id) {
       this.openAddEditModel(id);
     },
-
     deleteContact(id) {
-      console.log(id);
+      this.$api.delete(`api/contacts/${id}`).then(() => {
+        this.removeContact(id);
+      });
     },
-
     createContact() {
       this.openAddEditModel(0);
     },
-
     openAddEditModel(id) {
       this.selectedContactId = id;
 
       nextTick( () => {
         this.$refs.contactAddEditModal.show();
       });
-    }
+    },
+    removeContact(id) {
+      const item = this.contacts.filter(c => c.id === id)[0];
+      const index = this.contacts.indexOf(item);
 
+      if (index !== -1) {
+        this.contacts.splice(index, 1);
+      }
+    },
+    onContactAdded(contact) {
+      this.contacts.push(contact);
+    },
+    onContactUpdated(contact) {
+      this.removeContact(contact.id);
+
+      this.contacts.push(contact);
+    }
   },
 }
 </script>

@@ -1,9 +1,10 @@
+using System.Net;
 using MediatR;
 
 namespace Contacts.Application.Commands.DeleteContact
 {
-    public class DeleteContactCommand : IRequest<Unit>
+    public class DeleteContactCommand : IRequest<HttpStatusCode>
     {
-        public long ContactId { get; set; }
+        public long Id { get; set; }
     }
 }

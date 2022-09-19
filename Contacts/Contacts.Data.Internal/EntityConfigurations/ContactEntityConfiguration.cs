@@ -18,6 +18,10 @@ namespace Contacts.Data.Internal.EntityConfigurations
             builder.Property(c => c.JobTitle)
                 .HasMaxLength(DataConstants.ContactJobTitleMaxLenght)
                 .IsRequired();
+                
+            builder.Property(c => c.MobilePhone)
+                .HasMaxLength(DataConstants.ContactMobilePhoneMaxLenght)
+                .IsRequired();
         }
     }
 }

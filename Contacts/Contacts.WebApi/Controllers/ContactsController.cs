@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,6 +6,7 @@ using System.Threading.Tasks;
 using Contacts.Application.Commands.CreateContact;
 using Contacts.Application.Commands.DeleteContact;
 using Contacts.Application.Commands.UpdateContact;
+using Contacts.Application.Queries.GetContactById;
 using Contacts.Application.Queries.GetContacts;
 using Contacts.Application.ViewModels;
 using MediatR;
@@ -42,6 +42,22 @@ namespace Contacts.WebApi.Controllers
             return result.ToList();
         }
 
+        [HttpGet("{contactId}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<ContactVM>> GetContactById([FromRoute] long contactId)
+        {
+            var query = new GetContactByIdQuery { Id = contactId};
+            var contact = await _sender.Send(query);
+
+            if (contact == null)
+            {
+                return NotFound();
+            }
+            
+            return contact;
+        }
+
         [HttpPut]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -52,14 +68,15 @@ namespace Contacts.WebApi.Controllers
             return Ok();
         }
 
-        [HttpDelete]
+        [HttpDelete("{contactId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult> DeleteContact([FromBody] DeleteContactCommand request)
+        public async Task<ActionResult> DeleteContact([FromRoute] long contactId)
         {
-            var result = await _sender.Send(request);
-
-            return Ok();
+            var request = new DeleteContactCommand { Id = contactId };
+            var result = (int) await _sender.Send(request);
+            
+            return new StatusCodeResult(result);
         }
     }
 }
